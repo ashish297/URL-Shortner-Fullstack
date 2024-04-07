@@ -9,6 +9,7 @@ const { checkForAuthentication, restrictTo } = require('./middlewares/auth');
 
 
 const app = express();
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
@@ -27,4 +28,4 @@ app.use("/", staticRouter);
 app.use("/url" ,restrictTo(["Normal", "ADMIN"]), urlRoute);
 app.use("/user", userRoute);
 
-app.listen(8000, ()=>console.log("Server Started!"));
+app.listen(PORT, ()=>console.log("Server Started!"));
