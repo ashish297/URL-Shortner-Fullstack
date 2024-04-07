@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+  <nav class="w-full h-14 bg-blue-600 flex items-center justify-between px-4 text-white">
+    <div><a href="/" class="text-3xl">URL Shortner</a></div>
+    <div
+      class="focus:outline-none text-white bg-black hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2  ">
+      <a href="/logout">Logout</a></div>
+  </nav>
+  <form action="/url" method="post" class=" ml-4 grid grid-flow-row justify-center">
+    <div class="text-2xl font-semibold mb-4">Enter Your URL</div>
+    <div class="mb-4">
+      <input type="text" name="url" placeholder="https://example.com"
+        class=" w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+    </div>
+    <div><button type="submit"
+        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ">Generate</button>
+    </div>
+  </form>
+  <div>
+    <% if (locals.id) { %>
+      <div class="flex justify-center mt-4">URL Generated : http://localhost:8000/url/<%= id %>
+      </div>
+      <% } %>
+  </div>
+
+
+
+
+  <div class="relative overflow-x-auto mt-10">
+    <% if (locals.urls) { %>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">
+              Serial No.
+            </th>
+            <th scope="col" class="px-6 py-3">
+              ShortURL
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Redirect Link
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Clicks
+            </th>
+          </tr>
+        </thead>
+        <% urls.forEach((element, index)=> { %>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= index + 1 %>
+              </th>
+              <td class="px-6 py-4">
+                http://localhost:8000/url/<%= element.shortId %>
+              </td>
+              <td class="px-6 py-4">
+                <%= element.redirectUrl %>
+              </td>
+              <td class="px-6 py-4">
+                <%= element.visitHistory.length %>
+              </td>
+            </tr>
+          </tbody>
+          <% }) %>
+      </table>
+      <% } %>
+  </div>
+
+
+</body>
+
+</html>
