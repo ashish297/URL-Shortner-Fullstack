@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(checkForAuthentication);
 
 //connect to db
-mongoose.connect("mongodb://localhost:27017/url-shortner")
+mongoose.connect("mongodb+srv://ashish73400:12345@urlshortner.nb4vu7h.mongodb.net/?retryWrites=true&w=majority&appName=urlshortner")
   .then(()=>console.log("Connected to Database!"))
   .catch(err=>console.log("Error", err));
 
